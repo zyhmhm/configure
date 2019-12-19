@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.dao.OrderMapper">
+    <select id="findAll" resultType="com.tedu.pojo.Order">
+        select id,door_id doorId,order_no orderNo,order_type orderType,
+        pnum,cashier,order_time orderTime,pay_time payTime,pay_type payType,price
+        from tb_order
+    </select>
+    <update id="insert">
+        insert into tb_order values (null,#{doorId},#{orderNo},#{orderType},#{pnum}
+        ,#{cashier},#{orderTime},#{payTime},#{payType},#{price})
+    </update>
+    <update id="delete">
+        delete from tb_order where id=#{id}
+    </update>
+    <resultMap id="resultMap" type="com.tedu.pojo.Order">
+        <id column="id" property="id" />
+        <id column="door_id" property="doorId"/>
+        <id column="order_no" property="orderNo"/>
+        <id column="order_type" property="orderType"/>
+        <id column="pnum" property="pnum"/>
+        <id column="cashier" property="cashier"/>
+        <id column="order_time" property="orderTime"/>
+        <id column="pay_time" property="payTime"/>
+        <id column="pay_type" property="payType"/>
+        <id column="price" property="price"/>
+    </resultMap>
+    <select id="findById" resultMap="resultMap">
+        select * from tb_order where id=#{id}
+    </select>
+    <update id="updateById">
+        update tb_order set door_id=#{doorId},order_no=#{orderNo},order_type=#{orderType},pnum=#{pnum},cashier=#{cashier},order_time=#{orderTime},pay_time=#{payTime},pay_type=#{payType},price=#{price}
+		where id=#{id}
+    </update>
+</mapper>
